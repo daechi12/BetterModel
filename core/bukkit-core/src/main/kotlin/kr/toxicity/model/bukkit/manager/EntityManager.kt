@@ -41,6 +41,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.event.world.EntitiesUnloadEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.potion.PotionEffectType
@@ -103,6 +104,16 @@ object EntityManager : GlobalManager {
         fun EntityDismountEvent.dismount() { //Dismount
             val e = dismounted
             isCancelled = e is HitBox && (e.mountController().canFly() || !e.mountController().canDismountBySelf()) && !e.forceDismount()
+        }
+        @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+        fun PlayerToggleSneakEvent.sneak() { //Shift dismount for HitBox mounts
+            if (!isSneaking) return
+            val vehicle = player.vehicle as? HitBox ?: return
+            val controller = vehicle.mountController()
+            if (!controller.canDismountBySelf()) return
+            // Flying mounts: shift in air = descend (handled by mountControl), not dismount
+            if (controller.canFly() && !player.isOnGround) return
+            vehicle.dismount(player.wrap())
         }
         @EventHandler(priority = EventPriority.MONITOR)
         fun PlayerQuitEvent.quit() { //Quit
