@@ -222,10 +222,13 @@ internal class HitBoxImpl(
         if (!mountController.canFly() && delegate.isFallFlying) return
 
         updateFlyStatus(player)
+        // 마운트 회전: 이동 여부 관계없이 항상 플레이어 방향으로 동기화
+        // 바닐라 AbstractHorse.travel()와 동일하게 yRot/yHeadRot/yBodyRot 모두 설정
+        delegate.yRot = player.yRot
+        delegate.yHeadRot = player.yRot
+        (delegate as? LivingEntity)?.yBodyRot = player.yRot
         val riddenInput = rideInput(player, travelVector)
         if (riddenInput.length() > 0.01) {
-            delegate.yRot = player.yRot
-            delegate.yHeadRot = player.yRot
             delegate.move(MoverType.SELF, Vec3(riddenInput.x.toDouble(), riddenInput.y.toDouble(), riddenInput.z.toDouble()))
         }
         val dy = delegate.deltaMovement.y + delegate.gravity
