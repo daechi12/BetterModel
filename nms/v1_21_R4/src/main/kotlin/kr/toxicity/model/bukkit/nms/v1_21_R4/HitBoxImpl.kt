@@ -225,7 +225,7 @@ internal class HitBoxImpl(
         val riddenInput = rideInput(player, travelVector)
         if (riddenInput.length() > 0.01) {
             delegate.yRot = player.yRot
-            if (onFly) delegate.yHeadRot = player.yRot
+            delegate.yHeadRot = player.yRot
             delegate.move(MoverType.SELF, Vec3(riddenInput.x.toDouble(), riddenInput.y.toDouble(), riddenInput.z.toDouble()))
         }
         val dy = delegate.deltaMovement.y + delegate.gravity
