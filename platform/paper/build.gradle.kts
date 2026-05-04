@@ -12,9 +12,11 @@ val dependenciesContent: String = libs.bundles.library.map { bundle ->
 }.get()
 
 dependencies {
-    shade(project(":nms:v1_21_R3")) { isTransitive = false }
-    shade(project(":nms:v1_21_R4")) { isTransitive = false }
-    shade(project(":nms:v1_21_R5")) { isTransitive = false }
+    // Campfire fork: R3/R4/R5 제외 (paperweight remap이 Java 25 클래스 요구 — 환경 이슈)
+    // 1.21.11 서버는 R7만 필요. R6/v26_R1는 추가 호환성용.
+    // shade(project(":nms:v1_21_R3")) { isTransitive = false }
+    // shade(project(":nms:v1_21_R4")) { isTransitive = false }
+    // shade(project(":nms:v1_21_R5")) { isTransitive = false }
     shade(project(":nms:v1_21_R6")) { isTransitive = false }
     shade(project(":nms:v1_21_R7")) { isTransitive = false }
     shade(project(":nms:v26_R1")) { isTransitive = false }

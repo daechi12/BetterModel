@@ -57,9 +57,10 @@ include(
     "purpur",
 
     //nms
-    "nms:v1_21_R3",
-    "nms:v1_21_R4",
-    "nms:v1_21_R5",
+    // Campfire fork: R3/R4/R5 제외 (paperweight remap이 Java 25 요구 — 환경 호환 이슈)
+    // "nms:v1_21_R3",
+    // "nms:v1_21_R4",
+    // "nms:v1_21_R5",
     "nms:v1_21_R6",
     "nms:v1_21_R7",
     "nms:v26_R1",

@@ -10,9 +10,10 @@ val dependenciesContent: List<String> = libs.bundles.library.map {
 }.get()
 
 dependencies {
-    shade(project(":nms:v1_21_R3", configuration = "reobf")) { isTransitive = false }
-    shade(project(":nms:v1_21_R4", configuration = "reobf")) { isTransitive = false }
-    shade(project(":nms:v1_21_R5", configuration = "reobf")) { isTransitive = false }
+    // Campfire fork: R3/R4/R5 제외 (paperweight remap이 Java 25 요구)
+    // shade(project(":nms:v1_21_R3", configuration = "reobf")) { isTransitive = false }
+    // shade(project(":nms:v1_21_R4", configuration = "reobf")) { isTransitive = false }
+    // shade(project(":nms:v1_21_R5", configuration = "reobf")) { isTransitive = false }
     shade(project(":nms:v1_21_R6", configuration = "reobf")) { isTransitive = false }
     shade(project(":nms:v1_21_R7", configuration = "reobf")) { isTransitive = false }
     shade(project(":nms:v26_R1")) { isTransitive = false }

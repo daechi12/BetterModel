@@ -40,9 +40,10 @@ internal class BetterModelProperties(
         V26_1, V26_1_1, V26_1_2 -> Latest()
         V1_21_11 -> kr.toxicity.model.bukkit.nms.v1_21_R7.NMSImpl()
         V1_21_9, V1_21_10 -> kr.toxicity.model.bukkit.nms.v1_21_R6.NMSImpl()
-        V1_21_6, V1_21_7, V1_21_8 -> kr.toxicity.model.bukkit.nms.v1_21_R5.NMSImpl()
-        V1_21_5 -> kr.toxicity.model.bukkit.nms.v1_21_R4.NMSImpl()
-        V1_21_4 -> kr.toxicity.model.bukkit.nms.v1_21_R3.NMSImpl()
+        // Campfire fork: R3/R4/R5 빌드 제외 — 1.21.4~1.21.8은 미지원 (else로 폴백)
+        // V1_21_6, V1_21_7, V1_21_8 -> kr.toxicity.model.bukkit.nms.v1_21_R5.NMSImpl()
+        // V1_21_5 -> kr.toxicity.model.bukkit.nms.v1_21_R4.NMSImpl()
+        // V1_21_4 -> kr.toxicity.model.bukkit.nms.v1_21_R3.NMSImpl()
         else -> {
             warn(
                 "Note: this version is officially untested.".toComponent(),
