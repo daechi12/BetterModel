@@ -226,12 +226,15 @@ internal class HitBoxImpl(
         if (!mountController.canFly() && delegate.isFallFlying) return
 
         updateFlyStatus(player)
+        delegate.xxa = 0f
+        delegate.zza = 0f
         val riddenInput = rideInput(player, travelVector)
         if (riddenInput.length() > 0.01) {
-            delegate.yRot = player.yRot
-            if (onFly) delegate.yHeadRot = player.yRot
             delegate.move(MoverType.SELF, Vec3(riddenInput.x.toDouble(), riddenInput.y.toDouble(), riddenInput.z.toDouble()))
         }
+        delegate.yRot = player.yRot
+        delegate.yHeadRot = player.yRot
+        (delegate as? LivingEntity)?.yBodyRot = player.yRot
         val dy = delegate.deltaMovement.y + delegate.gravity
         if (!onFly && mountController.canJump() && (delegate.horizontalCollision || player.isJump()) && dy in 0.0..0.01 && jumpDelay == 0) {
             jumpDelay = 10

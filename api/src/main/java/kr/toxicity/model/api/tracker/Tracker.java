@@ -20,6 +20,7 @@ import kr.toxicity.model.api.data.renderer.RenderPipeline;
 import kr.toxicity.model.api.data.renderer.RenderSource;
 import kr.toxicity.model.api.entity.BaseEntity;
 import kr.toxicity.model.api.event.*;
+import net.kyori.adventure.text.Component;
 import kr.toxicity.model.api.event.hitbox.HitBoxEvent;
 import kr.toxicity.model.api.nms.*;
 import kr.toxicity.model.api.platform.PlatformLocation;
@@ -706,6 +707,21 @@ public abstract class Tracker implements AutoCloseable {
                 tag.send(player);
             });
         }), predicate);
+    }
+
+    /**
+     * Updates the text component of all nametags attached to this tracker.
+     *
+     * @param component the new text component, or null to clear
+     * @since campfire
+     */
+    public void updateNametagComponent(@Nullable Component component) {
+        pipeline.forEach(bone -> {
+            var tag = bone.getNametag();
+            if (tag != null) {
+                tag.component(component);
+            }
+        });
     }
 
     //--- Update action ---

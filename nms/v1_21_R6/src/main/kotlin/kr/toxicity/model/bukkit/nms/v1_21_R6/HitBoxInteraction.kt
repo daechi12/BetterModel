@@ -40,7 +40,8 @@ internal class HitBoxInteraction(
         val dimension = delegate.dimensions
         width = dimension.width
         height = dimension.height
-        yRot = delegate.yRot
+        val rider = firstPassenger
+        yRot = if (rider != null) rider.yRot else delegate.yRot
         xRot = delegate.xRot
         setSharedFlagOnFire(delegate.remainingFireTicks > 0)
     }
